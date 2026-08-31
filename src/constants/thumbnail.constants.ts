@@ -1,0 +1,1 @@
+export const THUMBNAIL_MAX_WIDTH_PX = 160;

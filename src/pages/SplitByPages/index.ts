@@ -1,0 +1,1 @@
+export { SplitByPages } from './SplitByPages';
