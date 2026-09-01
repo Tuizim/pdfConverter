@@ -4,6 +4,7 @@ import { MultiFileResult } from '@/components/MultiFileResult';
 import { ProgressBar } from '@/components/ProgressBar';
 import { useLoadedPdfFile } from '@/hooks/useLoadedPdfFile.hook';
 import type { PageGroupRequest } from '@/models/split.model';
+import { buildZipFileName } from '@/utils/buildZipFileName.util';
 import { isCompletedWithResult } from '@/utils/isCompletedWithResult.util';
 import { isReadyToConfigure } from '@/utils/isReadyToConfigure.util';
 import { SplitPagesConfigurator } from './components/SplitPagesConfigurator';
@@ -14,9 +15,12 @@ export function SplitByPages() {
   const { file, preview, status, errorMessage, loadFile, reset: resetFile } = useLoadedPdfFile();
   const { step, progress, error, resultFiles, run, cancel, reset: resetRun } = useSplitByPagesRun();
   const [mode, setMode] = useState<SplitPagesMode>('intervalos');
+  const [submittedFileName, setSubmittedFileName] = useState('');
 
   const handleSubmit = (groups: PageGroupRequest[]) => {
-    if (file) run({ fileName: file.name, file }, groups);
+    if (!file) return;
+    setSubmittedFileName(file.name);
+    run({ fileName: file.name, file }, groups);
   };
 
   const handleRestart = () => {
@@ -28,7 +32,7 @@ export function SplitByPages() {
     return (
       <MultiFileResult
         files={resultFiles}
-        zipFileName="paginas-divididas.zip"
+        zipFileName={buildZipFileName(submittedFileName)}
         onRestart={handleRestart}
       />
     );
@@ -37,7 +41,9 @@ export function SplitByPages() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dividir por páginas</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          Dividir por páginas
+        </h1>
         <p className="mt-1 text-gray-600">Escolha um PDF e divida em vários arquivos.</p>
       </div>
 

@@ -10,7 +10,7 @@ export default defineConfig({
     format: 'es',
   },
   // O app já depende de OPFS, workers de módulo e mupdf-wasm (que usa
-  // top-level await) — recursos só existentes em navegadores modernos.
+  // top-level await), recursos só existentes em navegadores modernos.
   // Um target mais conservador quebra o build do worker sem trazer
   // compatibilidade real com nada que o app suporte de qualquer forma.
   build: {

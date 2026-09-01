@@ -25,7 +25,7 @@ export function RangesForm({ totalPages, baseName, onSubmit }: RangesFormProps) 
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 rounded-2xl border border-gray-200 bg-white p-5 shadow-soft">
       <label htmlFor="ranges-input" className="text-sm font-medium text-gray-700">
         Intervalos de páginas
       </label>
@@ -35,15 +35,15 @@ export function RangesForm({ totalPages, baseName, onSubmit }: RangesFormProps) 
         value={input}
         onChange={handleChange}
         placeholder="ex: 1-3, 7, 10-12"
-        className="rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
+        className="rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
       />
       <p className="text-xs text-gray-500">O documento tem {totalPages} páginas.</p>
       {error && (
-        <p className="text-sm text-red-600" role="alert">
+        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600" role="alert">
           {error}
         </p>
       )}
-      <Button onClick={handleSubmit} disabled={input.trim().length === 0}>
+      <Button size="lg" className="mt-1" onClick={handleSubmit} disabled={input.trim().length === 0}>
         Dividir
       </Button>
     </div>

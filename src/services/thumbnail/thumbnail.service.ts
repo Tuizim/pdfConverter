@@ -38,7 +38,7 @@ export async function getPdfPreview(file: File): Promise<PdfPreview> {
     }
   } catch (error) {
     console.error('[thumbnail.service] falha ao gerar miniatura', error);
-    throw new Error(`Não foi possível ler "${file.name}" — verifique se é um PDF válido.`);
+    throw new Error(`Não foi possível ler "${file.name}", verifique se é um PDF válido.`);
   } finally {
     URL.revokeObjectURL(objectUrl);
   }
@@ -66,6 +66,6 @@ export async function openPdfThumbnailSource(file: File): Promise<PdfThumbnailSo
   } catch (error) {
     URL.revokeObjectURL(objectUrl);
     console.error('[thumbnail.service] falha ao abrir PDF para miniaturas', error);
-    throw new Error(`Não foi possível ler "${file.name}" — verifique se é um PDF válido.`);
+    throw new Error(`Não foi possível ler "${file.name}", verifique se é um PDF válido.`);
   }
 }

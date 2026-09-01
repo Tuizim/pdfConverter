@@ -30,5 +30,9 @@ export function useMergeFileList(): UseMergeFileListResult {
     });
   }, []);
 
-  return { files, addFiles, removeFile, reorderFiles };
+  const clearFiles = useCallback(() => {
+    setFiles([]);
+  }, []);
+
+  return { files, addFiles, removeFile, reorderFiles, clearFiles };
 }

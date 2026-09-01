@@ -1,4 +1,5 @@
 import { useRef, type ChangeEvent, type KeyboardEvent } from 'react';
+import { UploadIcon } from '@/components/icons';
 import { useFileDrop } from '@/hooks/useFileDrop.hook';
 import { cn } from '@/utils/cn.util';
 import type { DropZoneProps } from './DropZone.model';
@@ -34,11 +35,21 @@ export function DropZone({
       onKeyDown={handleKeyDown}
       {...dragHandlers}
       className={cn(
-        'flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-10 text-center transition-colors',
-        isDragging ? 'border-brand-500 bg-brand-50' : 'border-gray-300 hover:border-brand-500',
+        'flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-12 text-center transition-all duration-150',
+        isDragging
+          ? 'scale-[1.01] border-brand-500 bg-brand-50'
+          : 'border-gray-300 bg-white hover:border-brand-400 hover:bg-brand-50/40',
       )}
     >
-      <p className="text-lg font-medium text-gray-700">{label}</p>
+      <div
+        className={cn(
+          'flex h-14 w-14 items-center justify-center rounded-full transition-colors',
+          isDragging ? 'bg-brand-100 text-brand-600' : 'bg-gray-100 text-gray-500',
+        )}
+      >
+        <UploadIcon className="h-7 w-7" />
+      </div>
+      <p className="text-lg font-medium text-gray-800">{label}</p>
       {helperText && <p className="text-sm text-gray-500">{helperText}</p>}
       <input
         ref={inputRef}

@@ -4,4 +4,5 @@ export interface MultiFileResultProps {
   files: SplitOutputFile[];
   zipFileName: string;
   onRestart: () => void;
+  restartLabel?: string;
 }

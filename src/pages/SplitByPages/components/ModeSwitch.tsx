@@ -10,7 +10,7 @@ const OPTIONS: Array<{ value: SplitPagesMode; label: string }> = [
 
 export function ModeSwitch({ mode, onChange }: ModeSwitchProps) {
   return (
-    <div role="tablist" className="inline-flex gap-1 rounded-lg bg-gray-100 p-1">
+    <div role="tablist" className="inline-flex flex-wrap gap-1 rounded-xl bg-gray-100 p-1">
       {OPTIONS.map((option) => (
         <button
           key={option.value}
@@ -19,9 +19,9 @@ export function ModeSwitch({ mode, onChange }: ModeSwitchProps) {
           aria-selected={mode === option.value}
           onClick={() => onChange(option.value)}
           className={cn(
-            'rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
+            'rounded-lg px-3.5 py-2 text-sm font-medium transition-all',
             mode === option.value
-              ? 'bg-white text-gray-900 shadow-sm'
+              ? 'bg-white text-brand-700 shadow-soft'
               : 'text-gray-600 hover:text-gray-900',
           )}
         >

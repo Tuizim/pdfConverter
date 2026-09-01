@@ -3,6 +3,7 @@ import { DropZone } from '@/components/DropZone';
 import { MultiFileResult } from '@/components/MultiFileResult';
 import { ProgressBar } from '@/components/ProgressBar';
 import { useLoadedPdfFile } from '@/hooks/useLoadedPdfFile.hook';
+import { buildZipFileName } from '@/utils/buildZipFileName.util';
 import { isCompletedWithResult } from '@/utils/isCompletedWithResult.util';
 import { isReadyToConfigure } from '@/utils/isReadyToConfigure.util';
 import { SizeWarningsBanner } from './components/SizeWarningsBanner';
@@ -22,10 +23,12 @@ export function SplitBySize() {
     reset: resetRun,
   } = useSplitBySizeRun();
   const [submittedLimitMB, setSubmittedLimitMB] = useState(0);
+  const [submittedFileName, setSubmittedFileName] = useState('');
 
   const handleSubmit = (limitMB: number) => {
     if (!file) return;
     setSubmittedLimitMB(limitMB);
+    setSubmittedFileName(file.name);
     run({ fileName: file.name, file }, limitMB);
   };
 
@@ -40,7 +43,7 @@ export function SplitBySize() {
         <SizeWarningsBanner warnings={warnings} limitMB={submittedLimitMB} />
         <MultiFileResult
           files={resultFiles}
-          zipFileName="pdf-dividido-por-tamanho.zip"
+          zipFileName={buildZipFileName(submittedFileName)}
           onRestart={handleRestart}
         />
       </div>
@@ -50,9 +53,11 @@ export function SplitBySize() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dividir por tamanho máximo</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          Dividir por tamanho máximo
+        </h1>
         <p className="mt-1 text-gray-600">
-          Escolha um PDF e um limite de tamanho — cada arquivo gerado fica abaixo dele.
+          Escolha um PDF e um limite de tamanho, cada arquivo gerado fica abaixo dele.
         </p>
       </div>
 

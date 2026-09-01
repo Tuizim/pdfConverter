@@ -23,7 +23,7 @@ export function FixedCountForm({ totalPages, baseName, onSubmit }: FixedCountFor
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 rounded-2xl border border-gray-200 bg-white p-5 shadow-soft">
       <label htmlFor="pages-per-file" className="text-sm font-medium text-gray-700">
         Páginas por arquivo
       </label>
@@ -34,12 +34,14 @@ export function FixedCountForm({ totalPages, baseName, onSubmit }: FixedCountFor
         max={totalPages}
         value={pagesPerFile}
         onChange={handleChange}
-        className="w-32 rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
+        className="w-32 rounded-lg border border-gray-300 px-3 py-2.5 text-sm font-medium focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100"
       />
       <p className="text-xs text-gray-500">
         Isso vai gerar {fileCount} arquivo{fileCount === 1 ? '' : 's'}.
       </p>
-      <Button onClick={handleSubmit}>Dividir</Button>
+      <Button size="lg" className="mt-1" onClick={handleSubmit}>
+        Dividir
+      </Button>
     </div>
   );
 }

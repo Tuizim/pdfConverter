@@ -14,7 +14,7 @@ function clamp(value: number, min: number, max: number): number {
 }
 
 // Uma medição para o mesmo par (start, pageCount) nunca deve rodar duas
-// vezes — probing e a decisão final de cada pedaço frequentemente pedem o
+// vezes: probing e a decisão final de cada pedaço frequentemente pedem o
 // mesmo par.
 function withMeasurementCache(measure: MeasurePagesFn): MeasurePagesFn {
   const cache = new Map<string, number>();

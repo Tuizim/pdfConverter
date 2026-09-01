@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Button } from '@/components/Button';
 import { DropZone } from '@/components/DropZone';
 import { ProgressBar } from '@/components/ProgressBar';
+import { stripPdfExtension } from '@/utils/stripPdfExtension.util';
 import { MergeFileList } from './components/MergeFileList';
 import { MergeResult } from './components/MergeResult';
 import { useMergeFileList } from './useMergeFileList.hook';
@@ -14,25 +15,36 @@ const MERGE_STAGE_LABELS: Record<string, string> = {
 };
 
 export function MergePdf() {
-  const { files, addFiles, removeFile, reorderFiles } = useMergeFileList();
+  const { files, addFiles, removeFile, reorderFiles, clearFiles } = useMergeFileList();
   const { step, progress, error, resultBlob, run, cancel, reset } = useMergeRun();
+  const [resultFileName, setResultFileName] = useState('documento-unido.pdf');
 
   const readyFiles = useMemo(() => files.filter((item) => item.status === 'pronto'), [files]);
   const canMerge = readyFiles.length >= 2 && files.every((item) => item.status !== 'carregando');
 
   const handleMerge = () => {
+    setResultFileName(`${stripPdfExtension(readyFiles[0]!.name)}-unido.pdf`);
     run(readyFiles.map((item) => ({ id: item.id, name: item.name, file: item.file })));
   };
 
+  const handleRestart = () => {
+    reset();
+    clearFiles();
+  };
+
   if (step === 'concluido' && resultBlob) {
-    return <MergeResult resultBlob={resultBlob} onRestart={reset} />;
+    return <MergeResult resultBlob={resultBlob} fileName={resultFileName} onRestart={handleRestart} />;
   }
 
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Juntar PDFs</h1>
-        <p className="mt-1 text-gray-600">Escolha dois ou mais PDFs e organize a ordem antes de juntar.</p>
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          Juntar PDFs
+        </h1>
+        <p className="mt-1 text-gray-600">
+          Escolha dois ou mais PDFs e organize a ordem antes de juntar.
+        </p>
       </div>
 
       <DropZone
@@ -59,7 +71,7 @@ export function MergePdf() {
       )}
 
       {step === 'organizar' && (
-        <Button onClick={handleMerge} disabled={!canMerge}>
+        <Button size="lg" onClick={handleMerge} disabled={!canMerge}>
           Juntar {readyFiles.length} PDFs
         </Button>
       )}

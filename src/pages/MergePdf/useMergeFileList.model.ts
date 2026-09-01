@@ -5,4 +5,5 @@ export interface UseMergeFileListResult {
   addFiles: (files: File[]) => void;
   removeFile: (id: string) => void;
   reorderFiles: (fromIndex: number, toIndex: number) => void;
+  clearFiles: () => void;
 }

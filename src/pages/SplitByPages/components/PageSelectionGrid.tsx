@@ -46,7 +46,7 @@ export function PageSelectionGrid({ file, totalPages, baseName, onSubmit }: Page
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-soft">
       <p className="text-sm text-gray-600">Clique nas páginas que você quer extrair.</p>
       <div className="grid grid-cols-4 gap-3 sm:grid-cols-6 md:grid-cols-8">
         {source &&
@@ -60,7 +60,7 @@ export function PageSelectionGrid({ file, totalPages, baseName, onSubmit }: Page
             />
           ))}
       </div>
-      <Button onClick={handleSubmit} disabled={selected.size === 0}>
+      <Button size="lg" onClick={handleSubmit} disabled={selected.size === 0}>
         Extrair {selected.size} página{selected.size === 1 ? '' : 's'}
       </Button>
     </div>

@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react';
 import type { UseIntersectionOnceResult } from './useIntersectionOnce.model';
 
 // Dispara `onVisible` uma única vez, quando o elemento entra na viewport, e
-// para de observar em seguida — usado para renderizar miniaturas sob demanda
+// para de observar em seguida. Usado para renderizar miniaturas sob demanda
 // em grades grandes, em vez de renderizar todas de uma vez.
 export function useIntersectionOnce(onVisible: () => void): UseIntersectionOnceResult {
   const onVisibleRef = useRef(onVisible);

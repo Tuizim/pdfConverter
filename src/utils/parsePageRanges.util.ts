@@ -6,7 +6,7 @@ function parseSinglePage(token: string, totalPages: number): number | string {
   const page = Number(token);
   if (!Number.isInteger(page)) return `"${token}" não é um número de página válido.`;
   if (page < 1 || page > totalPages) {
-    return `A página ${page} não existe — o documento tem ${totalPages} páginas.`;
+    return `A página ${page} não existe, o documento tem ${totalPages} páginas.`;
   }
   return page;
 }

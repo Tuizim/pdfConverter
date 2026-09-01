@@ -9,7 +9,7 @@ import { OPFS_STAGING_THRESHOLD_BYTES } from '@/constants/storage.constants';
 
 // mupdf faz `await` no próprio carregamento do WASM (arquivo de ~10MB) já no
 // topo do módulo. Se importássemos isso estaticamente, `Comlink.expose`
-// só rodaria (e só passaria a escutar mensagens) depois desse await —
+// só rodaria (e só passaria a escutar mensagens) depois desse await:
 // qualquer chamada RPC feita antes disso seria descartada em silêncio e
 // ficaria pendurada para sempre. Import dinâmico evita isso: o módulo do
 // worker termina de avaliar e registra o listener do Comlink na hora;
@@ -39,7 +39,7 @@ export async function openPdf(bytes: Uint8Array, fileName: string): Promise<PDFD
   const mupdf = await getMupdf();
   const document = mupdf.Document.openDocument(bytes, fileName);
   if (document.needsPassword()) {
-    throw new Error(`"${fileName}" está protegido por senha — remova a senha antes de continuar.`);
+    throw new Error(`"${fileName}" está protegido por senha, remova a senha antes de continuar.`);
   }
   const pdf = document.asPDF();
   if (!pdf) {
@@ -50,7 +50,7 @@ export async function openPdf(bytes: Uint8Array, fileName: string): Promise<PDFD
 
 // Constrói um novo PDFDocument só com as páginas pedidas (0-based, via
 // graftPage) e serializa. measure() e a emissão final do arquivo usam esta
-// mesma função — garante que o tamanho medido bate com o tamanho real salvo.
+// mesma função, o que garante que o tamanho medido bate com o tamanho real salvo.
 export async function buildAndSerializePages(
   srcDoc: PDFDocument,
   pageIndexes: number[],
@@ -63,7 +63,7 @@ export async function buildAndSerializePages(
     }
     const buffer = chunkDoc.saveToBuffer();
     try {
-      // Copia os bytes para fora do heap WASM antes de destruir o buffer —
+      // Copia os bytes para fora do heap WASM antes de destruir o buffer:
       // asUint8Array() é uma view sobre memória que fica inválida assim que
       // o Buffer é destruído.
       return buffer.asUint8Array().slice();

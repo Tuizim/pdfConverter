@@ -15,15 +15,19 @@ export function MergeFileItem({ item, index, onRemove, dragHandlers }: MergeFile
       onDragStart={() => dragHandlers.onDragStart(index)}
       onDragOver={handleDragOver}
       onDrop={dragHandlers.onDrop}
-      className="flex items-center gap-3 rounded-lg border bg-white p-3 shadow-sm"
+      className="group flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-3 shadow-soft transition-shadow hover:shadow-card"
     >
-      <span className="cursor-grab text-gray-400">
+      <span className="cursor-grab text-gray-300 transition-colors group-hover:text-gray-500">
         <GripIcon />
       </span>
       {item.thumbnailUrl ? (
-        <img src={item.thumbnailUrl} alt="" className="h-16 w-12 rounded border object-cover" />
+        <img
+          src={item.thumbnailUrl}
+          alt=""
+          className="h-16 w-12 rounded-md border border-gray-200 object-cover"
+        />
       ) : (
-        <div className="h-16 w-12 animate-pulse rounded border bg-gray-100" />
+        <div className="h-16 w-12 animate-pulse rounded-md border border-gray-200 bg-gray-100" />
       )}
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-medium text-gray-900">{item.name}</p>
@@ -37,7 +41,7 @@ export function MergeFileItem({ item, index, onRemove, dragHandlers }: MergeFile
         type="button"
         onClick={() => onRemove(item.id)}
         aria-label={`Remover ${item.name}`}
-        className="text-sm font-medium text-gray-500 hover:text-red-600"
+        className="rounded-lg px-2 py-1 text-sm font-medium text-gray-400 transition-colors hover:bg-red-50 hover:text-red-600"
       >
         Remover
       </button>
