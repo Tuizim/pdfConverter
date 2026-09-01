@@ -111,6 +111,36 @@ export function SplitSizeIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function ImageToPdfIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
+      <rect x="2.5" y="4" width="10" height="10" rx="1.3" stroke="currentColor" strokeWidth="1.8" />
+      <circle cx="6" cy="7.5" r="1.1" stroke="currentColor" strokeWidth="1.4" />
+      <path
+        d="M3.5 12l2.7-2.7 2.2 2.2 2.6-3.3"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M13.5 9h4a1.5 1.5 0 011.5 1.5v8a1 1 0 01-1 1h-8a1 1 0 01-1-1v-6"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M13.5 9v3a1 1 0 001 1h4"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function ArrowRightIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" {...props}>

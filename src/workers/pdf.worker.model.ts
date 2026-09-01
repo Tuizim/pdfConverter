@@ -1,4 +1,9 @@
 import type { CancelToken } from '@/models/cancel-token.model';
+import type {
+  JpgToPdfProgress,
+  JpgToPdfWorkerInput,
+  JpgToPdfWorkerResult,
+} from '@/models/jpg-to-pdf.model';
 import type { MergeProgress, MergeWorkerInput, MergeWorkerResult } from '@/models/merge.model';
 import type {
   PageGroupRequest,
@@ -29,4 +34,10 @@ export interface PdfWorkerApi {
     onProgress: (progress: SplitBySizeProgress) => void,
     cancelToken: CancelToken,
   ): Promise<SplitBySizeRunResult>;
+
+  jpgsToPdf(
+    inputs: JpgToPdfWorkerInput[],
+    onProgress: (progress: JpgToPdfProgress) => void,
+    cancelToken: CancelToken,
+  ): Promise<JpgToPdfWorkerResult>;
 }

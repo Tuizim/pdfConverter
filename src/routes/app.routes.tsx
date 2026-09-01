@@ -11,6 +11,7 @@ const SplitByPages = lazy(() =>
 const SplitBySize = lazy(() =>
   import('@/pages/SplitBySize').then((m) => ({ default: m.SplitBySize })),
 );
+const JpgToPdf = lazy(() => import('@/pages/JpgToPdf').then((m) => ({ default: m.JpgToPdf })));
 
 function withSuspense(element: ReactElement): ReactElement {
   return (
@@ -33,6 +34,7 @@ export const appRouter = createBrowserRouter([
       { path: routePath(ROUTES.mergePdf), element: withSuspense(<MergePdf />) },
       { path: routePath(ROUTES.splitByPages), element: withSuspense(<SplitByPages />) },
       { path: routePath(ROUTES.splitBySize), element: withSuspense(<SplitBySize />) },
+      { path: routePath(ROUTES.jpgToPdf), element: withSuspense(<JpgToPdf />) },
     ],
   },
 ]);

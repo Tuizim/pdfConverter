@@ -1,4 +1,4 @@
-import { MergeIcon, SplitPagesIcon, SplitSizeIcon } from '@/components/icons';
+import { ImageToPdfIcon, MergeIcon, SplitPagesIcon, SplitSizeIcon } from '@/components/icons';
 import { ToolCard } from '@/components/ToolCard';
 import { ROUTES } from '@/constants/routes.constants';
 
@@ -31,6 +31,12 @@ export function Home() {
           title="Dividir por tamanho máximo"
           description="Divida um PDF grande em vários arquivos, cada um abaixo do limite que você definir."
           icon={<SplitSizeIcon className="h-full w-full" />}
+        />
+        <ToolCard
+          to={ROUTES.jpgToPdf}
+          title="JPG para PDF"
+          description="Transforme uma ou várias imagens JPG em um único arquivo PDF."
+          icon={<ImageToPdfIcon className="h-full w-full" />}
         />
       </div>
     </div>
