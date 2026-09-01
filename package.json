@@ -12,6 +12,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@tanstack/react-virtual": "^3.14.10",
     "@zip.js/zip.js": "^2.7.53",
     "clsx": "^2.1.1",
     "comlink": "^4.4.2",
